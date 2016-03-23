@@ -6,14 +6,14 @@ import requests
 
 app = Flask(__name__)
 
-def generate_response(url):	
-		if not url.startswith('https://') and not url.startswith('https://'):
-			url = 'http://' + url
-		req = requests.get(url)
-		return Response(req.content, content_type = req.headers['content-type'])
+def generate_response(url):
+	if not url.startswith('https://') and not url.startswith('https://'):
+		url = 'http://' + url
+	req = requests.get(url, stream=True)
+	return Response(stream_with_context(req.iter_content()), content_type = req.headers['content-type'])
 
 @app.route('/<path:url>')
-def kprx(url):	
+def kprx(url):
 	return generate_response(url)
 
 
@@ -21,7 +21,7 @@ def kprx(url):
 def index():
 	if request.method == "POST":
 		url = request.form['inpurl']
-		return generate_response(url)
+		generate_response(url)
 	return render_template('index.html')
 
 if __name__ == '__main__':
