@@ -21,7 +21,7 @@ def kprx(url):
 def index():
 	if request.method == "POST":
 		url = request.form['inpurl']
-		generate_response(url)
+		return generate_response(url)
 	return render_template('index.html')
 
 if __name__ == '__main__':
