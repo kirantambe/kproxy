@@ -7,13 +7,13 @@ import requests
 app = Flask(__name__)
 
 def generate_response(url):	
+		if not url.startswith('https://') and not url.startswith('https://'):
+			url = 'http://' + url
 		req = requests.get(url)
 		return Response(req.content, content_type = req.headers['content-type'])
 
 @app.route('/<path:url>')
-def kprx(url):
-	if not url.startswith('https://') and not url.startswith('https://'):
-		url = 'http://' + url
+def kprx(url):	
 	return generate_response(url)
 
 
