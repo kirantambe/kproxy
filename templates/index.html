@@ -35,7 +35,7 @@
 <body>
     <div class="container">
         <h1>KPRX</h1>
-        <form id="urlform" action="/" onsubmit="location.href = this.action + this.inpurl.value; return false;">
+        <form id="urlform" action="/" method="post">
             <input type="text" id="inpurl" name="inpurl">
             <input type="submit" value="Go!">
         </form>
